@@ -1,0 +1,75 @@
+.step1{
+    width: 28px;
+    height: 26px;
+    left: 165px;
+    top: 78px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 160% */
+    
+    letter-spacing: -0.9px;
+    
+    /* green */
+    
+    color: #56B280;
+}
+
+.step2{
+    width: 45px;
+    height: 26px;
+    left: 223px;
+    top: 78px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 160% */
+    
+    letter-spacing: -0.9px;
+    
+    /* black */
+    
+    color: #272727;
+}
+
+.step3{
+    width: 57px;
+    height: 26px;
+    left: 298px;
+    top: 77px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 160% */
+    
+    letter-spacing: -0.9px;
+    
+    color: #616161;
+}
+
+.step4{
+    width: 58px;
+    height: 26px;
+    left: 385px;
+    top: 78px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height, or 160% */
+    
+    letter-spacing: -0.9px;
+    
+    color: #616161;    
+}
