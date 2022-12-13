@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/shipping.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+        <title>Shipping</title>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                <img class="icon" src="img/icon.png" alt="icon">
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="row mt-4">
+                        <div class="container steps-wrapper">
+                            <h6 class="steps">
+                                <a href="#" class="step1">Cart</a>
+                                <span class="vector">></span>
+                                <a href="details.html" class="step2">Details</a>
+                                <span class="vector">></span>
+                                <a href="#" class="step3">Shipping</a>
+                                <span class="vector">></span>
+                                <a href="#" class="step4">Payment </a>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="row mt-4 boxes">
+                        <div class="row mt-3">
+                            <div class="col-2">
+                                <h6 class="stittle">Contact</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="scontent">someone@gmail.com</p>
+                            </div>
+                            <div class="col-2" style="text-align: right">
+                                <a href="#" class="sedit">Edit</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <hr style="margin-left: 15px; margin-top: 5px; width: 95%;">
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <h6 class="stittle">Ship to</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="scontent">address</p>
+                            </div>
+                            <div class="col-2" style="text-align: right">
+                                <a href="#" class="sedit">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="row section-tittle" style="margin-left: 0px;">
+                            <h5 class="tittle">Shipping method</h5>
+                        </div>
+                    </div>
+                    <form action="">
+                        <div class="row mt-3 boxes">
+                            <div class="row" style="padding: 1%;">
+                                <div class="col-2">
+                                    <input type="checkbox" name="shipping-check" id="shipping-check">
+                                </div>
+                                <div class="col-8">
+                                    <p class="scontent" style="margin-top: 20px">Standard Shipping</p>
+                                </div>
+                                <div class="col-2">
+                                    <h6 class="shipping-cost" style="margin-top: 20px; text-align: right;">Free</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5"  style="margin-left: 10px;">
+                            <div class="col-6 mt-5">
+                                <div class="row">
+                                    <a href="details.html" class="ret">Back to details</a>
+                                </div>
+                            </div>
+                            <div class="col-6 mt-5" style="width: 37%;">
+                                <button type="submit" class="btn go-pay" name="add_record_btn">Go to Shipping</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 mt-4" style="background-color: #F2F2F2;">
+                    <div class="row mt-5">
+                        <div class="col-12 product" style="width: 88%;">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="img/thumbnail_placeholder.png" alt="product" class="product-img">
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h6 class="product-name">Spiced Mint Candleleaf</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="price">$ 9.99</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <hr style="margin-top: 50px; width: 88%;">
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-6" style="text-align: left;">
+                                        <h6>Subtotal</h6>
+                                    </div>
+                                    <div class="col-6" style="text-align: right; width: 43%;">
+                                        <h6>$ 9.99</h6>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-6" style="text-align: left;">
+                                        <h6>Shipping</h6>
+                                    </div>
+                                    <div class="col-6" style="text-align: right; width: 43%;">
+                                        <h6>Free Shipping</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <hr style="margin-top: 50px; width: 88%;">
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="row">
+                                    <div class="col-6" style="text-align: left;">
+                                        <h6>Total</h6>
+                                    </div>
+                                    <div class="col-6" style="text-align: right; width: 43%;">
+                                        <h5>$ 9.99</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src = "assets/js/jquery-3.6.1.min.js"></script>
+        <script src = "assets/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
