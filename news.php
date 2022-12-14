@@ -1,6 +1,12 @@
 <?php
 include 'db_connection.php';
+require_once('session.php');
 session_start();
+if (isset($_SESSION['current_user'])) {
+    $current_user = unserialize($_SESSION['current_user']);
+}else{
+    $current_user=new User();
+}
 $conn = OpenCon();
 $query ="SELECT * FROM `product_testing_news`";
 //echo "Connected Successfully";

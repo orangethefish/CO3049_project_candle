@@ -9,7 +9,14 @@ function numcheck($value){
     }
 }
 include 'db_connection.php';
+require_once('session.php');
 session_start();
+if (isset($_SESSION['current_user'])) {
+    $current_user = unserialize($_SESSION['current_user']);
+}else{
+    $current_user=new User();
+}
+// echo $current_user->getUser();
 $conn = OpenCon();
 // echo $_SERVER['REQUEST_URI'];
 $id=$_GET['id'];
@@ -131,14 +138,29 @@ if(isset($_POST['delete_id'])) {
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
-                                <form class="mb-4" method="POST" action="">
+                                <?php 
+                                if($current_user->getRole()!=0){
+                                    echo
+                                        '<form class="mb-4" method="POST" action="">
                                     <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" name="comment"></textarea>
                                     <div class="form-actions my-2">
                                         <button type="submit" class="btn btn-success pull-right" name="submit">
                                             Submit <i class="fa fa-arrow-circle-right"></i>
                                         </button>
                                     </div>
-                                </form>
+                                </form>';
+                                }else{
+                                    echo
+                                        '<form class="mb-4" method="POST" action="">
+                                    <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" name="comment"></textarea>
+                                    <div class="form-actions my-2">
+                                        <button type="submit" class="btn btn-success pull-right" name="submit" disabled>
+                                            Submit <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+                                </form>';
+                                }
+                                ?>
                                 <!-- Comment with nested comments-->
                                 <!-- <div class="d-flex mb-4"> -->
                                     <!-- Parent comment-->
@@ -175,21 +197,33 @@ if(isset($_POST['delete_id'])) {
                                    // OUTPUT DATA OF EACH ROW
                                    while($row = $result->fetch_assoc())
                                    {
-                                       if($row['post_no']==$id){
-                                            echo '<form class="mb-4" method="POST" action="">
+                                        if ($row['post_no'] == $id) {
+                                            if ($current_user->getRole()==1) {
+                                                echo '<form class="mb-4" method="POST" action="">
                                             <div class="d-flex my-2">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" width="40px" alt="..." /></div>
                                     <div class="ms-3 container">
-                                        <div class="fw-bold">'.$row['owner'].'</div>
-                                        '.$row['detail'].'
+                                        <div class="fw-bold">' . $row['owner'] . '</div>
+                                        ' . $row['detail'] . '
                                         </div>
-                                        <input type="hidden" name="delete_id" value="'.$row['id'].'" />
+                                        <input type="hidden" name="delete_id" value="' . $row['id'] . '" />
                                         <button type="submit" class="btn btn-danger pull-right" name="Delete">
                                             Delete <i class="fa fa-arrow-circle-right"></i>
                                         </button>
                                     </div>
                                     </form>';
-                                       }
+                                            }else{
+                                                echo '
+                                            <div class="d-flex my-2">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" width="40px" alt="..." /></div>
+                                    <div class="ms-3 container">
+                                        <div class="fw-bold">' . $row['owner'] . '</div>
+                                        ' . $row['detail'] . '
+                                        </div>
+                                        
+                                    </div>';
+                                            }
+                                        }
                                    }
                                 }
                                 else {
