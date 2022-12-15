@@ -8,6 +8,26 @@ function numcheck($value){
         }
     }
 }
+function blockcheck($current_user){
+    $res = false;
+    $conn = OpenCon();
+    $query ="SELECT * FROM `admin_blocklist`";
+    //echo "Connected Successfully";
+    $result=$conn->query($query);
+    if ($result->num_rows > 0)
+    {
+   // OUTPUT DATA OF EACH ROW
+   while($row = $result->fetch_assoc())
+   {
+            if (strcmp($row['user_id'], $current_user->getName()) == 0) {
+                $res = true;
+                break;
+            } 
+   }
+    }
+    CloseCon($conn);
+    return $res;
+}
 include 'db_connection.php';
 require_once('session.php');
 session_start();
@@ -16,7 +36,8 @@ if (isset($_SESSION['current_user'])) {
 }else{
     $current_user=new User();
 }
-// echo $current_user->getUser();
+$block=blockcheck($current_user);
+// echo $current_user->getName();
 $conn = OpenCon();
 // echo $_SERVER['REQUEST_URI'];
 $id=$_GET['id'];
@@ -55,26 +76,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['comment'])) {
         $conn = OpenCon();
         $sql = "INSERT INTO news_comment (post_no, owner, date, detail)
-        VALUES ('.$id.', 'Orange','".$date."','".$_POST['comment']."')";
-
+        VALUES ('.$id.', '".$current_user->getName()."','".$date."','".$_POST['comment']."')";
         if ($conn->query($sql) === TRUE) {
         //   echo "New record created successfully";
+            $comment_count++;
+            update_comment($comment_count,$id);
         } else {
         //   echo "Error: " . $sql . "<br>" . $conn->error;
         }
-    CloseCon($conn);
-}
-if(isset($_POST['delete_id'])) {
-    $conn = OpenCon();
-    $delete_id = $_POST['delete_id'];
-    $delete = "DELETE FROM news_comment WHERE id = '$delete_id'";
-    if ($conn->query($delete) === TRUE) {
-        //   echo "Record deleted successfully";
-        } else {
-        //   echo "Error: " . $sql . "<br>" . $conn->error;
+        CloseCon($conn);
     }
-    CloseCon($conn);
+    if (isset($_POST['admin_button'])) {
+        switch ($_POST['admin_button']) {
+            case "Delete":
+                if (isset($_POST['delete_id'])) {
+                    $conn = OpenCon();
+                    $delete_id = $_POST['delete_id'];
+                    $delete = "DELETE FROM news_comment WHERE id = '$delete_id'";
+                    if ($conn->query($delete) === TRUE) {
+                        echo "Record deleted successfully";
+                        $comment_count--;
+                        update_comment($comment_count, $id);
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+                    CloseCon($conn);
+                }
+                break;
+            case "Block":
+                if (isset($_POST['block_name'])) {
+                    $conn = OpenCon();
+                    $block_name = $_POST['block_name'];
+                    // echo $block_name;
+                    $sql = "INSERT INTO admin_blocklist (user_id, blocked_by)
+        VALUES ('$block_name', '" . $current_user->getName() . "')";
+                    if ($conn->query($sql) === TRUE) {
+                        // echo "New record created successfully";
+                    } else {
+                        // echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+                    CloseCon($conn);
+                }
+                break;
+        }
+    }
 }
+function update_comment($comment_count,$id){
+    $conn = OpenCon();
+    $update_comment = "UPDATE product_testing_news SET comment_count=$comment_count WHERE id=$id";
+    if ($conn->query($update_comment) === TRUE) {
+        // echo "Record updated successfully";
+    } else {
+        // echo "Error updating record: " . $conn->error;
+    }
+CloseCon($conn);
 }
 ?>
 <!DOCTYPE html>
@@ -139,7 +194,7 @@ if(isset($_POST['delete_id'])) {
                             <div class="card-body">
                                 <!-- Comment form-->
                                 <?php 
-                                if($current_user->getRole()!=0){
+                                if($current_user->getRole()!=0&&!$block){
                                     echo
                                         '<form class="mb-4" method="POST" action="">
                                     <textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!" name="comment"></textarea>
@@ -207,9 +262,13 @@ if(isset($_POST['delete_id'])) {
                                         ' . $row['detail'] . '
                                         </div>
                                         <input type="hidden" name="delete_id" value="' . $row['id'] . '" />
-                                        <button type="submit" class="btn btn-danger pull-right" name="Delete">
-                                            Delete <i class="fa fa-arrow-circle-right"></i>
-                                        </button>
+                                        <input type="hidden" name="block_name" value="' . $row['owner'] . '" />
+                                        <input type="submit" class="btn btn-danger pull-right mx-2" name="admin_button" value="Delete">
+                                            
+                                        </input>
+                                        <input type="submit" class="btn btn-danger pull-right" name="admin_button" value="Block">
+                                            
+                                        </input>
                                     </div>
                                     </form>';
                                             }else{

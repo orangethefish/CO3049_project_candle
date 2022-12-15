@@ -99,6 +99,7 @@ $result=$conn->query($query);
                             echo '<span> ' . $row['date'] . '</span>';
                             echo '</div>';
                             echo '</td>';
+                            
                             echo '<td>
                             <a href="detail.php?id=' . $row['id'] . '" class="text-dark">
                                 <span>'.$row['comment_count'].'</span>
