@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/details.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/details.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
         <title>Details</title>
@@ -279,7 +279,7 @@
                 }
             }
         </script>
-        <script src = "assets/js/jquery-3.6.1.min.js"></script>
-        <script src = "assets/js/bootstrap.bundle.min.js"></script>
+        <script src = "js/jquery-3.6.1.min.js"></script>
+        <script src = "js/bootstrap.bundle.min.js"></script>
     </body>
     </html>
